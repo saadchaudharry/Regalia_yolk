@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regalia Yolk - Coming Soon</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    user-select:none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#fee1d0;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+picture{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:100%;
+}
+
+img{
+    max-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+    object-fit:contain;
+
+    -webkit-user-drag:none;
+    user-drag:none;
+    pointer-events:none;
+}
+
+/* Hide if user prints */
+@media print{
+    body{
+        display:none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<picture>
+
+    <!-- Mobile -->
+    <source
+        media="(max-width:767px)"
+        srcset="assets/coming-soon-mobile.png">
+
+    <!-- Desktop -->
+    <source
+        media="(min-width:768px)"
+        srcset="assets/coming-soon-desktop.png">
+
+    <img
+        src="assets/coming-soon-desktop.png"
+        alt="Regalia Yolk"
+        draggable="false">
+
+</picture>
+
+<script>
+// Disable Right Click
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+// Disable Drag
+document.addEventListener("dragstart", e => e.preventDefault());
+
+// Disable Copy/Cut/Paste
+["copy","cut","paste"].forEach(event=>{
+    document.addEventListener(event,e=>e.preventDefault());
+});
+
+// Disable Text Selection
+document.addEventListener("selectstart",e=>e.preventDefault());
+
+// Disable Keyboard Shortcuts
+document.addEventListener("keydown",function(e){
+
+    const key=e.key.toUpperCase();
+
+    if(
+        key==="F12" ||
+        (e.ctrlKey && e.shiftKey && ["I","J","C","K"].includes(key)) ||
+        (e.ctrlKey && ["S","U","P","A"].includes(key))
+    ){
+        e.preventDefault();
+        return false;
+    }
+
+});
+
+// Basic DevTools Detection
+setInterval(function(){
+
+    if(
+        window.outerWidth-window.innerWidth>160 ||
+        window.outerHeight-window.innerHeight>160
+    ){
+        document.body.style.filter="blur(20px)";
+    }else{
+        document.body.style.filter="none";
+    }
+
+},500);
+
+</script>
+
+</body>
+</html>
